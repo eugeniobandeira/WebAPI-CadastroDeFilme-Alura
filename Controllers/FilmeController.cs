@@ -4,7 +4,6 @@ using FilmesAPI_Alura.Data.DTOs;
 using FilmesAPI_Alura.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FilmesAPI_Alura.Controllers
 {
@@ -32,6 +31,7 @@ namespace FilmesAPI_Alura.Controllers
         public IActionResult AdicionarFilme([FromBody] UpdateFilmeDTO filmeDTO)
         {
             Filme filme = _mapper.Map<Filme>(filmeDTO);
+            _context.Filmes.Add(filme);
             _context.SaveChanges(); 
             return CreatedAtAction(nameof(ConsultarPorId), new { id = filme.Id }, filme);
         }
@@ -41,7 +41,7 @@ namespace FilmesAPI_Alura.Controllers
         /// Recupera uma lista de filmes do banco de dados
         /// </summary>
         /// <param name="skip">Número de filmes que serão pulados</param>
-        /// <param name="take">Número de filmes que serão recuperados</param>
+        /// <param name="take">Número de filmes que serão exibidos por página</param>
         /// <returns>Informações dos filmes buscados</returns>
         /// <response code="200">Com a lista de filmes presentes na base de dados</response>
         [HttpGet]
@@ -95,7 +95,7 @@ namespace FilmesAPI_Alura.Controllers
 
 
         /// <summary>
-        /// Atualiza valores parciais da descrição do filme no banco de dados usando seu id
+        /// Atualiza valores parciais da obejto filme no banco de dados usando seu id
         /// </summary>
         /// <param name="id">Id do filme a ser atualizado no banco</param>
         /// <param name="op">Tipo de operação</param>

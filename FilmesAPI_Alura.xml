@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FilmesAPI_Alura</name>
+    </assembly>
+    <members>
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.AdicionarFilme(FilmesAPI_Alura.Data.DTOs.UpdateFilmeDTO)">
+            <summary>
+            Adiciona um filme ao banco de dados
+            </summary>
+            <param name="filmeDto">Objeto com os campos necessários para criação de um filme</param>
+            <returns>IActionResult</returns>
+            <response code="201">Caso inserção seja feita com sucesso</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.ConsultarFilmes(System.Int32,System.Int32)">
+            <summary>
+            Recupera uma lista de filmes do banco de dados
+            </summary>
+            <param name="skip">Número de filmes que serão pulados</param>
+            <param name="take">Número de filmes que serão exibidos por página</param>
+            <returns>Informações dos filmes buscados</returns>
+            <response code="200">Com a lista de filmes presentes na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.ConsultarPorId(System.Int32)">
+            <summary>
+            Recupera um filme no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do filme a ser recuperado no banco</param>
+            <returns>Informações do filme buscado</returns>
+            <response code="200">Caso o id seja existente na base de dados</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.AtualizaFilme(System.Int32,FilmesAPI_Alura.Data.DTOs.UpdateFilmeDTO)">
+            <summary>
+            Atualiza um filme no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do filme a ser atualizado no banco</param>
+            <param name="filmeDto">Objeto com os campos necessários para atualização de um filme</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o filme tenha sido atualizado</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.AtualizarFilmeParcil(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{FilmesAPI_Alura.Data.DTOs.UpdateFilmeDTO})">
+            <summary>
+            Atualiza valores parciais da descrição do filme no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do filme a ser atualizado no banco</param>
+            <param name="op">Tipo de operação</param>
+            <param name="path">'/nome do atributo que deseja alterar o valor' - Ex '/titulo'</param>
+            <param name="value"> novo valor</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o filme tenha sido atualizado</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.ExcluirFilme(System.Int32)">
+            <summary>
+            Deleta um filme do banco de dados usando seu id
+            </summary>
+            <param name="id">Id do filme a ser removido do banco</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o filme tenha sido removido</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="T:FilmesAPI_Alura.Migrations.CriandoTabelaDeFilme">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.CriandoTabelaDeFilme.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.CriandoTabelaDeFilme.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.CriandoTabelaDeFilme.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FilmesAPI_Alura.Migrations.Atualização">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.Atualização.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.Atualização.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.Atualização.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
