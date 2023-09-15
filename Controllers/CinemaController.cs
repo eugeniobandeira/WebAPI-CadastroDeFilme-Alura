@@ -33,7 +33,8 @@ namespace FilmesAPI_Alura.Controllers
         [HttpGet]
         public IEnumerable<ReadCinemaDTO> ConsultarCinemas()
         {
-            return _mapper.Map<List<ReadCinemaDTO>>(_context.Cinemas.ToList());
+            var listaDeCinemas = _mapper.Map<List<ReadCinemaDTO>>(_context.Cinemas.ToList());
+            return listaDeCinemas;
         }
 
         [HttpGet("{id}")]

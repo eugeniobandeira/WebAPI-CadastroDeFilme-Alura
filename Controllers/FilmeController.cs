@@ -47,9 +47,10 @@ namespace FilmesAPI_Alura.Controllers
         /// <returns>Informações dos filmes buscados</returns>
         /// <response code="200">Com a lista de filmes presentes na base de dados</response>
         [HttpGet]
-        public IEnumerable<Filme>ConsultarFilmes([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public IEnumerable<ReadFilmeDTO> ConsultarFilmes([FromQuery] int skip = 0,
+        [FromQuery] int take = 10)
         {
-            return (IEnumerable<Filme>)_mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take));
+            return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take));
         }
 
 

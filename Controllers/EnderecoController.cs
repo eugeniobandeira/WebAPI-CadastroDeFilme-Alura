@@ -31,9 +31,9 @@ namespace FilmesAPI_Alura.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReadCinemaDTO> ConsultarEndereco()
+        public IEnumerable<ReadEnderecoDTO> ConsultarEndereco()
         {
-            return (IEnumerable<ReadCinemaDTO>)_mapper.Map<List<ReadEnderecoDTO>>(_context.Enderecos.ToList());
+            return (IEnumerable<ReadEnderecoDTO>)_mapper.Map<List<ReadEnderecoDTO>>(_context.Enderecos.ToList());
         }
 
         [HttpGet("{id}")]

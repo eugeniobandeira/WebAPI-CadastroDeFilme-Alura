@@ -18,9 +18,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-//Conexão com o BD 
+//Conexão com o BD - Depois adicionei o UseLazyLoadingProxies (possui relação com o virtual)
 builder.Services.AddDbContext<FilmeContext>(opts => 
-    opts.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
+    opts.UseLazyLoadingProxies().UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
 
 //Para usar o AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

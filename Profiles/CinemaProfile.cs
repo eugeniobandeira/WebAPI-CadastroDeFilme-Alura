@@ -9,7 +9,11 @@ namespace FilmesAPI_Alura.Profiles
         public CinemaProfile()
         {
             CreateMap<CreateCinemaDTO, Cinema>();
-            CreateMap<Cinema, ReadCinemaDTO>();
+            //Mapeando para pegar o Endereço (virtual) que está na model Cinema
+            CreateMap<Cinema, ReadCinemaDTO>().
+                ForMember(cinemaDTO => cinemaDTO.ReadEndereco, 
+                opt => opt.MapFrom(cinema => cinema.Endereco)); 
+            
             CreateMap<UpdateCinemaDTO, Cinema>();
         }
     }
