@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesAPI_Alura.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class SessaoController : ControllerBase
     {
         private FilmeContext _context;
@@ -17,59 +19,47 @@ namespace FilmesAPI_Alura.Controllers
             _mapper = mapper;
         }
 
-
         [HttpPost]
-        public IActionResult AdicionaSessao([FromBody] CreateSessaoDTO sessaoDTO)
+        public IActionResult AdicionaSessao(CreateSessaoDTO sessaoDTO)
         {
             Sessao sessao = _mapper.Map<Sessao>(sessaoDTO);
             _context.Sessoes.Add(sessao);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(ConsultarSessaoPorId), new { Id = sessao.Id }, sessaoDTO);
+            return CreatedAtAction(nameof(ConsultarSessoesPorId), new { Id = sessao.Id }, sessao);
         }
 
         [HttpGet]
-        public IEnumerable<ReadSessaoDTO> ConsultarSessao()
+        public IEnumerable<ReadSessaoDTO> ConsultarSessoes()
         {
-            return (IEnumerable<ReadSessaoDTO>)_mapper.Map<List<ReadSessaoDTO>>(_context.Sessoes.ToList());
+            return _mapper.Map<List<ReadSessaoDTO>>(_context.Sessoes.ToList());
         }
 
         [HttpGet("{id}")]
-        public IActionResult ConsultarSessaoPorId(int id)
+        public IActionResult ConsultarSessoesPorId(int id)
         {
             Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
             if (sessao != null)
             {
                 ReadSessaoDTO sessaoDTO = _mapper.Map<ReadSessaoDTO>(sessao);
+
                 return Ok(sessaoDTO);
             }
             return NotFound();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult AtualizaSessao(int id, [FromBody] UpdateSessaoDTO sessaoDTO)
-        {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
-            if (sessao == null)
-            {
-                return NotFound();
-            }
-            _mapper.Map(sessaoDTO, sessao);
-            _context.SaveChanges();
-            return NoContent();
-        }
-
-
         [HttpDelete("{id}")]
-        public IActionResult DeletarSessao(int id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult ExcluirSessao(int id)
         {
             Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
-            if (sessao == null)
+            if (sessao != null)
             {
-                return NotFound();
+                _context.Remove(sessao);
+                _context.SaveChanges();
+                return NoContent();
             }
-            _context.Remove(sessao);
-            _context.SaveChanges();
-            return NoContent();
+            return NotFound();
         }
     }
 }

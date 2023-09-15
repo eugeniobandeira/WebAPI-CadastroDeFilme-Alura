@@ -37,6 +37,7 @@ namespace FilmesAPI_Alura.Controllers
             return listaDeCinemas;
         }
 
+
         [HttpGet("{id}")]
         public IActionResult ConsultarCinemasPorId(int id)
         {

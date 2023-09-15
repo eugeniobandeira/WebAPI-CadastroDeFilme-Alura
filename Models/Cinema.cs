@@ -15,6 +15,7 @@ namespace FilmesAPI_Alura.Models
         //Relacionamento 1:1
         public virtual Endereco  Endereco { get; set; } //É preciso fazer a mesma coisa no Model Endereco
         //Virtual indica cardinalidade e permite recuperar uma instância do seu respectivo endereço
+        public virtual ICollection<Sessao> Sessoes { get; set; }
 
     }
 }

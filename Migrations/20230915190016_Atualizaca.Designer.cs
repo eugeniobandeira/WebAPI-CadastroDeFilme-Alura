@@ -2,6 +2,7 @@
 using FilmesAPI_Alura.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmesAPI_Alura.Migrations
 {
     [DbContext(typeof(FilmeContext))]
-    partial class FilmeContextModelSnapshot : ModelSnapshot
+    [Migration("20230915190016_Atualizaca")]
+    partial class Atualizaca
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,15 +92,10 @@ namespace FilmesAPI_Alura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("FilmeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CinemaId");
 
                     b.HasIndex("FilmeId");
 
@@ -117,26 +115,13 @@ namespace FilmesAPI_Alura.Migrations
 
             modelBuilder.Entity("FilmesAPI_Alura.Models.Sessao", b =>
                 {
-                    b.HasOne("FilmesAPI_Alura.Models.Cinema", "Cinema")
-                        .WithMany("Sessoes")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FilmesAPI_Alura.Models.Filme", "Filme")
                         .WithMany("Sessoes")
                         .HasForeignKey("FilmeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cinema");
-
                     b.Navigation("Filme");
-                });
-
-            modelBuilder.Entity("FilmesAPI_Alura.Models.Cinema", b =>
-                {
-                    b.Navigation("Sessoes");
                 });
 
             modelBuilder.Entity("FilmesAPI_Alura.Models.Endereco", b =>
