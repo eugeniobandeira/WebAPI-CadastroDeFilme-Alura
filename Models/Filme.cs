@@ -19,5 +19,8 @@ namespace FilmesAPI_Alura.Models
         [Range(70, 600, ErrorMessage = "A duração deve estar entre 70 e 600 minutos")]
         public int Duracao { get; set; }
 
+        //Relacionamento
+        public virtual ICollection<Sessao> Sessoes { get; set; } //Relação de muitos
+
     }
 }
