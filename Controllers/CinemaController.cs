@@ -7,7 +7,7 @@ using FilmesAPI_Alura.Models;
 namespace FilmesAPI_Alura.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
 
     public class CinemaController : ControllerBase
     {
