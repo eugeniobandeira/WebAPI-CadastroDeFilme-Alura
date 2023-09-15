@@ -33,7 +33,9 @@ namespace FilmesAPI_Alura.Controllers
             Filme filme = _mapper.Map<Filme>(filmeDTO);
             _context.Filmes.Add(filme);
             _context.SaveChanges(); 
-            return CreatedAtAction(nameof(ConsultarPorId), new { id = filme.Id }, filme);
+            return CreatedAtAction(nameof(ConsultarPorId), 
+                new { id = filme.Id }, 
+                filme);
         }
 
 
@@ -47,7 +49,7 @@ namespace FilmesAPI_Alura.Controllers
         [HttpGet]
         public IEnumerable<Filme>ConsultarFilmes([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            return _context.Filmes.Skip(skip).Take(take);
+            return (IEnumerable<Filme>)_mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take));
         }
 
 
@@ -59,14 +61,11 @@ namespace FilmesAPI_Alura.Controllers
         /// <response code="200">Caso o id seja existente na base de dados</response>
         /// <response code="404">Caso o id seja inexistente na base de dados</response>
         [HttpGet("{id}")]
-        public IActionResult ConsultarPorId(int id) { 
+        public IActionResult ConsultarPorId(int id) {
             var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-            if (filme != null)
-            {
-                ReadFilmeDTO filmeDTO = _mapper.Map<ReadFilmeDTO>(filme);
-                return Ok(filmeDTO);
-            }
-            return NotFound();
+            if (filme == null) return NotFound();
+            var filmeDTO = _mapper.Map<ReadFilmeDTO>(filme);
+            return Ok(filmeDTO);
         }
 
 

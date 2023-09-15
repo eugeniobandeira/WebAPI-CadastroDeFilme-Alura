@@ -42,7 +42,7 @@
         </member>
         <member name="M:FilmesAPI_Alura.Controllers.FilmeController.AtualizarFilmeParcil(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{FilmesAPI_Alura.Data.DTOs.UpdateFilmeDTO})">
             <summary>
-            Atualiza valores parciais da descrição do filme no banco de dados usando seu id
+            Atualiza valores parciais da obejto filme no banco de dados usando seu id
             </summary>
             <param name="id">Id do filme a ser atualizado no banco</param>
             <param name="op">Tipo de operação</param>
