@@ -23,6 +23,12 @@ namespace FilmesAPI_Alura.Data
                 .HasOne(sessao => sessao.Filme)
                 .WithMany(filme => filme.Sessoes)
                 .HasForeignKey(sessao => sessao.FilmeId);
+
+            //Definindo o tipo de deleção
+            builder.Entity<Endereco>()
+                .HasOne(endereco => endereco.Cinema)
+                .WithOne(cinema => cinema.Endereco)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Filme> Filmes { get; set; }
