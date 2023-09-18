@@ -133,5 +133,29 @@
         <member name="M:FilmesAPI_Alura.Migrations.SessaoeCinema.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:FilmesAPI_Alura.Migrations.FilmeIdnulo">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.FilmeIdnulo.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.FilmeIdnulo.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.FilmeIdnulo.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FilmesAPI_Alura.Migrations.CinemaeFilme">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.CinemaeFilme.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.CinemaeFilme.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesAPI_Alura.Migrations.CinemaeFilme.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

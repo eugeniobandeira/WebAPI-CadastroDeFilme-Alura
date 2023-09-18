@@ -25,7 +25,8 @@ namespace FilmesAPI_Alura.Controllers
             Sessao sessao = _mapper.Map<Sessao>(sessaoDTO);
             _context.Sessoes.Add(sessao);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(ConsultarSessoesPorId), new { Id = sessao.Id }, sessao);
+            return CreatedAtAction(nameof(ConsultarSessoesPorId),
+                new { filmeId = sessao.FilmeId, cinemaId = sessao.CinemaId }, sessao);
         }
 
         [HttpGet]
@@ -34,10 +35,11 @@ namespace FilmesAPI_Alura.Controllers
             return _mapper.Map<List<ReadSessaoDTO>>(_context.Sessoes.ToList());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult ConsultarSessoesPorId(int id)
+        [HttpGet("{filmeId}/{cinemaId}")]
+        public IActionResult ConsultarSessoesPorId(int filmeId, int cinemaId)
         {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
+            Sessao sessao = _context.Sessoes
+                .FirstOrDefault(sessao => sessao.FilmeId == filmeId && sessao.CinemaId == cinemaId);
             if (sessao != null)
             {
                 ReadSessaoDTO sessaoDTO = _mapper.Map<ReadSessaoDTO>(sessao);
@@ -46,7 +48,7 @@ namespace FilmesAPI_Alura.Controllers
             }
             return NotFound();
         }
-
+        /*
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -61,5 +63,6 @@ namespace FilmesAPI_Alura.Controllers
             }
             return NotFound();
         }
+        */
     }
 }

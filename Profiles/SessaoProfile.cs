@@ -9,6 +9,7 @@ namespace FilmesAPI_Alura.Profiles
         public SessaoProfile()
         {
             CreateMap<CreateSessaoDTO, Sessao>();
+            CreateMap<Sessao, ReadSessaoDTO > ();
             CreateMap<Sessao, CreateSessaoDTO>();
             CreateMap<UpdateSessaoDTO, Sessao>();
         }
