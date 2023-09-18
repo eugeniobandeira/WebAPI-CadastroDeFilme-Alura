@@ -47,10 +47,21 @@ namespace FilmesAPI_Alura.Controllers
         /// <returns>Informações dos filmes buscados</returns>
         /// <response code="200">Com a lista de filmes presentes na base de dados</response>
         [HttpGet]
-        public IEnumerable<ReadFilmeDTO> ConsultarFilmes([FromQuery] int skip = 0,
-        [FromQuery] int take = 10)
+        public IEnumerable<ReadFilmeDTO> ConsultarFilmes(
+            [FromQuery] int skip = 0,
+            [FromQuery] int take = 10,
+            [FromQuery] string? nomeCinema = null)
         {
-            return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take).ToList());
+            if(nomeCinema == null)
+            {
+                return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take).ToList());
+            }
+            //Filtrando com LINQ
+            return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes
+                .Skip(skip)
+                .Take(take)
+                .Where(filme => filme.Sessoes
+                .Any(sessao => sessao.Cinema.Nome == nomeCinema)).ToList());
         }
 
 
@@ -74,7 +85,7 @@ namespace FilmesAPI_Alura.Controllers
         /// Atualiza um filme no banco de dados usando seu id
         /// </summary>
         /// <param name="id">Id do filme a ser atualizado no banco</param>
-        /// <param name="filmeDto">Objeto com os campos necessários para atualização de um filme</param>
+        /// <param name="filmeDTO">Objeto com os campos necessários para atualização de um filme</param>
         /// <returns>Sem conteúdo de retorno</returns>
         /// <response code="204">Caso o id seja existente na base de dados e o filme tenha sido atualizado</response>
         /// <response code="404">Caso o id seja inexistente na base de dados</response>
@@ -105,6 +116,8 @@ namespace FilmesAPI_Alura.Controllers
         /// <response code="204">Caso o id seja existente na base de dados e o filme tenha sido atualizado</response>
         /// <response code="404">Caso o id seja inexistente na base de dados</response>
         [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AtualizarFilmeParcil(int id, JsonPatchDocument<UpdateFilmeDTO> patch)
         {
             var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);

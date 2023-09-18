@@ -4,6 +4,92 @@
         <name>FilmesAPI_Alura</name>
     </assembly>
     <members>
+        <member name="M:FilmesAPI_Alura.Controllers.CinemaController.AdicionaCinema(FilmesAPI_Alura.Data.DTOs.CreateCinemaDTO)">
+            <summary>
+            Adiciona um cinema ao banco de dados
+            </summary>
+            <param name="cinemaDTO">Objeto com os campos necessários para criação de um filme</param>
+            <returns>IActionResult</returns>
+            <response code="201">Caso inserção seja feita com sucesso</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.CinemaController.ConsultarCinemas(System.Nullable{System.Int32})">
+            <summary>
+            Recupera uma lista de cinemas do banco de dados
+            </summary>
+            <returns>Informações dos cinemas buscados</returns>
+            <response code="200">Com a lista de cinemas presentes na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.CinemaController.ConsultarCinemasPorId(System.Int32)">
+            <summary>
+            Recupera um cinema no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do cinema a ser recuperado no banco</param>
+            <returns>Informações do cinema buscado</returns>
+            <response code="200">Caso o id seja existente na base de dados</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.CinemaController.AtualizaCinema(System.Int32,FilmesAPI_Alura.Data.DTOs.UpdateCinemaDTO)">
+            <summary>
+            Atualiza um cinema no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do cinema a ser atualizado no banco</param>
+            <param name="cinemaDTO">Objeto com os campos necessários para atualização de um cinema</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o cinema tenha sido atualizado</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.CinemaController.DeletarCinema(System.Int32)">
+            <summary>
+            Deleta um cinema do banco de dados usando seu id
+            </summary>
+            <param name="id">Id do cinema a ser removido do banco</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o cinema tenha sido removido</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.EnderecoController.AdicionaEndereco(FilmesAPI_Alura.Data.DTOs.CreateEnderecoDTO)">
+            <summary>
+            Adiciona um endereço ao banco de dados
+            </summary>
+            <param name="enderecoDTO">Objeto com os campos necessários para criação de um filme</param>
+            <returns>IActionResult</returns>
+            <response code="201">Caso inserção seja feita com sucesso</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.EnderecoController.ConsultarEndereco">
+            <summary>
+            Recupera uma lista de endereços do banco de dados
+            </summary>
+            <returns>Informações dos endereços buscados</returns>
+            <response code="200">Com a lista de endereços presentes na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.EnderecoController.ConsultarEnderecosPorId(System.Int32)">
+            <summary>
+            Recupera um endereço no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do endereço a ser recuperado no banco</param>
+            <returns>Informações do endereço buscado</returns>
+            <response code="200">Caso o id seja existente na base de dados</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.EnderecoController.AtualizaEndereco(System.Int32,FilmesAPI_Alura.Data.DTOs.UpdateEnderecoDTO)">
+            <summary>
+            Atualiza um endereço no banco de dados usando seu id
+            </summary>
+            <param name="id">Id do endereço a ser atualizado no banco</param>
+            <param name="enderecoDTO">Objeto com os campos necessários para atualização de um endereço</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o endereço tenha sido atualizado</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.EnderecoController.DeletarEndereco(System.Int32)">
+            <summary>
+            Deleta um endereço do banco de dados usando seu id
+            </summary>
+            <param name="id">Id do endereço a ser removido do banco</param>
+            <returns>Sem conteúdo de retorno</returns>
+            <response code="204">Caso o id seja existente na base de dados e o endereço tenha sido removido</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
         <member name="M:FilmesAPI_Alura.Controllers.FilmeController.AdicionarFilme(FilmesAPI_Alura.Data.DTOs.UpdateFilmeDTO)">
             <summary>
             Adiciona um filme ao banco de dados
@@ -12,7 +98,7 @@
             <returns>IActionResult</returns>
             <response code="201">Caso inserção seja feita com sucesso</response>
         </member>
-        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.ConsultarFilmes(System.Int32,System.Int32)">
+        <member name="M:FilmesAPI_Alura.Controllers.FilmeController.ConsultarFilmes(System.Int32,System.Int32,System.String)">
             <summary>
             Recupera uma lista de filmes do banco de dados
             </summary>
@@ -35,7 +121,7 @@
             Atualiza um filme no banco de dados usando seu id
             </summary>
             <param name="id">Id do filme a ser atualizado no banco</param>
-            <param name="filmeDto">Objeto com os campos necessários para atualização de um filme</param>
+            <param name="filmeDTO">Objeto com os campos necessários para atualização de um filme</param>
             <returns>Sem conteúdo de retorno</returns>
             <response code="204">Caso o id seja existente na base de dados e o filme tenha sido atualizado</response>
             <response code="404">Caso o id seja inexistente na base de dados</response>
@@ -60,6 +146,31 @@
             <returns>Sem conteúdo de retorno</returns>
             <response code="204">Caso o id seja existente na base de dados e o filme tenha sido removido</response>
             <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.SessaoController.AdicionaSessao(FilmesAPI_Alura.Data.DTOs.CreateSessaoDTO)">
+            <summary>
+            Adiciona uma sessão ao banco de dados
+            </summary>
+            <param name="sessaoDTO">Objeto com os campos necessários para criação de um filme</param>
+            <returns>IActionResult</returns>
+            <response code="201">Caso inserção seja feita com sucesso</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.SessaoController.ConsultarSessoes">
+            <summary>
+            Recupera uma lista de sessões do banco de dados
+            </summary>
+            <returns>Informações dos endereços buscados</returns>
+            <response code="200">Com a lista de sessões presentes na base de dados</response>
+        </member>
+        <member name="M:FilmesAPI_Alura.Controllers.SessaoController.ConsultarSessoesPorId(System.Int32,System.Int32)">
+            <summary>
+            Recupera uma sessão no banco de dados usando seu filmeId e cinemaId
+            </summary>
+            <param name="filmeId">Id do filme a ser recuperado no banco</param>
+            <param name="cinemaId">Id do cinema a ser recuperado no banco</param>
+            <returns>Informações da sessão buscada</returns>
+            <response code="200">Caso o filmeId, cinemaId sejam existentes na base de dados</response>
+            <response code="404">Caso o filmeId, cinemaId sejam inexistente na base de dados</response>
         </member>
         <member name="T:FilmesAPI_Alura.Migrations.CriandoTabelaDeFilme">
             <inheritdoc />

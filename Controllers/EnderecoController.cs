@@ -20,7 +20,12 @@ namespace FilmesAPI_Alura.Controllers
             _mapper = mapper;
         }
 
-
+        /// <summary>
+        /// Adiciona um endereço ao banco de dados
+        /// </summary>
+        /// <param name="enderecoDTO">Objeto com os campos necessários para criação de um filme</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso inserção seja feita com sucesso</response>
         [HttpPost]
         public IActionResult AdicionaEndereco([FromBody] CreateEnderecoDTO enderecoDTO)
         {
@@ -30,12 +35,24 @@ namespace FilmesAPI_Alura.Controllers
             return CreatedAtAction(nameof(ConsultarEnderecosPorId), new { Id = endereco.Id }, enderecoDTO);
         }
 
+        /// <summary>
+        /// Recupera uma lista de endereços do banco de dados
+        /// </summary>
+        /// <returns>Informações dos endereços buscados</returns>
+        /// <response code="200">Com a lista de endereços presentes na base de dados</response>
         [HttpGet]
         public IEnumerable<ReadEnderecoDTO> ConsultarEndereco()
         {
             return (IEnumerable<ReadEnderecoDTO>)_mapper.Map<List<ReadEnderecoDTO>>(_context.Enderecos.ToList());
         }
 
+        /// <summary>
+        /// Recupera um endereço no banco de dados usando seu id
+        /// </summary>
+        /// <param name="id">Id do endereço a ser recuperado no banco</param>
+        /// <returns>Informações do endereço buscado</returns>
+        /// <response code="200">Caso o id seja existente na base de dados</response>
+        /// <response code="404">Caso o id seja inexistente na base de dados</response>
         [HttpGet("{id}")]
         public IActionResult ConsultarEnderecosPorId(int id)
         {
@@ -48,6 +65,14 @@ namespace FilmesAPI_Alura.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Atualiza um endereço no banco de dados usando seu id
+        /// </summary>
+        /// <param name="id">Id do endereço a ser atualizado no banco</param>
+        /// <param name="enderecoDTO">Objeto com os campos necessários para atualização de um endereço</param>
+        /// <returns>Sem conteúdo de retorno</returns>
+        /// <response code="204">Caso o id seja existente na base de dados e o endereço tenha sido atualizado</response>
+        /// <response code="404">Caso o id seja inexistente na base de dados</response>
         [HttpPut("{id}")]
         public IActionResult AtualizaEndereco(int id, [FromBody] UpdateEnderecoDTO enderecoDTO)
         {
@@ -62,7 +87,16 @@ namespace FilmesAPI_Alura.Controllers
         }
 
 
+        /// <summary>
+        /// Deleta um endereço do banco de dados usando seu id
+        /// </summary>
+        /// <param name="id">Id do endereço a ser removido do banco</param>
+        /// <returns>Sem conteúdo de retorno</returns>
+        /// <response code="204">Caso o id seja existente na base de dados e o endereço tenha sido removido</response>
+        /// <response code="404">Caso o id seja inexistente na base de dados</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeletarEndereco(int id)
         {
             Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
